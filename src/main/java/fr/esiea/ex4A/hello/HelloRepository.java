@@ -2,32 +2,35 @@ package fr.esiea.ex4A.hello;
 
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
 @Repository
 class HelloRepository {
-    final List<String> names = List.of(
-            "Jaguabyss",
-            "Coyolax",
-            "Gazena",
-            "Chickig",
-            "Gladiabat",
-            "Gladiafly",
-            "Steeleen",
-            "Marsharak",
-            "Berriot",
-            "Penguine"
-    );
-    private final Random random = new Random();
+    final List<User> userSubscribed = new ArrayList<>();
 
-    HelloData randomHello() {
-        return new HelloData(names.get(random.nextInt(names.size())));
+    public HelloRepository() {
+        User user1 = new User("guillaume@esiea.fr", "Guillaume", "Guillaume", "FR", "M", "M");
+        userSubscribed.add(user1);
+        User user2 = new User("valentin@esiea.fr", "Valentin", "Valentin", "FR", "M", "F");
+        userSubscribed.add(user2);
+        User user3 = new User("matteo@esiea.fr", "Matteo", "Matteo", "FR", "M", "F");
+        userSubscribed.add(user3);
+        User user4 = new User("alexia@esiea.fr", "Alexia", "Alexia", "FR", "F", "M");
+        userSubscribed.add(user4);
+        User user5 = new User("julie@esiea.fr", "Julie", "Julie", "FR", "F", "M");
+        userSubscribed.add(user5);
     }
 
-    HelloData getHelloFor(String name) {
-        int letterIndex = name.toLowerCase(Locale.ROOT).charAt(0) - 'a';
-        return new HelloData((name + " ").repeat(1 + letterIndex).trim());
+    boolean userAdded(User user) {
+        if(userSubscribed.contains(user)) {
+            return false;
+        }
+        else {
+            userSubscribed.add(user);
+            return true;
+        }
     }
 }
