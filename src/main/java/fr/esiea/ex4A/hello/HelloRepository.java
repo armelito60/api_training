@@ -4,8 +4,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Random;
 
 @Repository
 class HelloRepository {
@@ -24,14 +22,17 @@ class HelloRepository {
         userSubscribed.add(user5);
     }
 
+    public List<User> getUserSubscribed() {
+        return this.userSubscribed;
+    }
+
     boolean userAdded(User user) {
-        if(userSubscribed.contains(user)) {
-            return false;
+        for (int i = 0; i < userSubscribed.size(); i++) {
+            if(userSubscribed.get(i).equals(user)) {
+                return false;
+            }
         }
-        else {
-            userSubscribed.add(user);
-            return true;
-        }
+        return true;
     }
 
 }

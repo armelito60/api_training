@@ -17,12 +17,12 @@ public class AgifyService {
     }
 
     public AgifyUser userAge(String name, String country) throws IOException {
-        return client.giveUserAge(name, country).execute().body();
+        return (AgifyUser) client.getAgeUser(name, country).execute().body();
     }
 
     public ArrayList<Match> getMatch(int goalAge) throws IOException {
         ArrayList<Match> matches = new ArrayList<>();
-        for(User match : helloRepository.userSubscribed) {
+        for(User match : helloRepository.getUserSubscribed()) {
             AgifyUser foundMatch = userAge(match.getUserName(), match.getUserCountry());
             if(foundMatch.getAge() - goalAge < 5 && foundMatch.getAge() - goalAge > -5) {
                 matches.add(new Match(match.getUserName(), match.getUserTweeter()));

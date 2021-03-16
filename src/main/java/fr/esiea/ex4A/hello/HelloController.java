@@ -1,12 +1,10 @@
 package fr.esiea.ex4A.hello;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +33,7 @@ class HelloController {
     @ResponseBody
     String match(@RequestParam(name = "userName", required = true) String userName,
                  @RequestParam(name = "userCountry", required = true) String userCountry) throws IOException {
-        client.giveUserAge(userName, userCountry);
+        client.getAgeUser(userName, userCountry);
         AgifyUser principal = agifyService.userAge(userName, userCountry);
         List<Match> matches = agifyService.getMatch(principal.getAge());
         ObjectMapper mapper = new ObjectMapper();

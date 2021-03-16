@@ -15,7 +15,7 @@ public class AgifyClientIT {
             .build()
             .create(AgifyClient.class);
 
-        Call<AgifyUser> user = test.giveUserAge("Armel","FR");
+        Call<AgifyUser> user = test.getAgeUser("Armel","FR");
         AgifyUser userFinal = user.execute().body();
         Assertions.assertEquals(56,userFinal.getAge());
         Assertions.assertEquals("FR",userFinal.getCountryId());
