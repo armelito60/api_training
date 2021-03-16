@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,12 @@ import java.util.Map;
 class HelloController {
 
     private final HelloRepository helloRepository;
+    private final AgifyClient client;
+    private final AgifyService agifyService;
 
-    HelloController(HelloRepository helloRepository) {
+    HelloController(AgifyClient client, AgifyService agifyService, HelloRepository helloRepository) {
+        this.client = client;
+        this.agifyService = agifyService;
         this.helloRepository = helloRepository;
     }
 
@@ -29,13 +34,11 @@ class HelloController {
     @GetMapping(path="/api/matches", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     String match(@RequestParam(name = "userName", required = true) String userName,
-                 @RequestParam(name = "userCountry", required = true) String userCountry) throws JsonProcessingException {
+                 @RequestParam(name = "userCountry", required = true) String userCountry) throws IOException {
+        client.giveUserAge(userName, userCountry);
+        AgifyUser principal = agifyService.userAge(userName, userCountry);
+        List<Match> matches = agifyService.getMatch(principal.getAge());
         ObjectMapper mapper = new ObjectMapper();
-        Match match = new Match("one","one");
-        Match match2 = new Match("two","two");
-        List<Match> matches = new ArrayList<>();
-        matches.add(match);
-        matches.add(match2);
         String result = mapper.writeValueAsString(matches);
         return result;
     }

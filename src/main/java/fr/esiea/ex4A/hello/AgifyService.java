@@ -21,7 +21,7 @@ public class AgifyService {
     }
 
     public ArrayList<Match> getMatch(int goalAge) throws IOException {
-        ArrayList<Match> matches = new ArrayList<Match>();
+        ArrayList<Match> matches = new ArrayList<>();
         for(User match : helloRepository.userSubscribed) {
             AgifyUser foundMatch = userAge(match.getUserName(), match.getUserCountry());
             if(foundMatch.getAge() - goalAge < 5 && foundMatch.getAge() - goalAge > -5) {
@@ -29,7 +29,6 @@ public class AgifyService {
             }
         }
         return matches;
-
     }
 
 }
