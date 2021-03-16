@@ -6,5 +6,5 @@ import retrofit2.http.Query;
 
 public interface AgifyClient {
     @GET("/")
-    Call<AgifyUser> getAgeUser(@Query("name") String names, @Query("country_id") String country);
+    Call<AgifyUser> giveUserAge(@Query("name") String names, @Query("country_id") String country);
 }
