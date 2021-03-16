@@ -4,5 +4,4 @@ class HelloRepositoryTest {
 
     private final HelloRepository helloRepository = new HelloRepository();
 
-
 }
