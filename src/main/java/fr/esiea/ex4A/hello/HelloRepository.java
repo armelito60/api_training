@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 class HelloRepository {
-    final List<User> userSubscribed = new ArrayList<>();
+    private final List<User> userSubscribed = new ArrayList<>();
 
     public HelloRepository() {
         User user1 = new User("guillaume@etudiant.fr", "Guillaume", "Guillaume", "FR", "M", "M");
@@ -27,11 +27,12 @@ class HelloRepository {
     }
 
     boolean userAdded(User user) {
-        for (int i = 0; i < userSubscribed.size(); i++) {
-            if(userSubscribed.get(i).equals(user)) {
+        for (User value : userSubscribed) {
+            if (value.getUserName().equals(user.getUserName())) {
                 return false;
             }
         }
+        userSubscribed.add(user);
         return true;
     }
 

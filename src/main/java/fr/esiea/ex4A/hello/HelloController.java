@@ -25,8 +25,7 @@ class HelloController {
     @PostMapping(path="/api/inscription", consumes = MediaType.APPLICATION_JSON_VALUE)
     boolean userIdentified(@RequestBody Map<String,String> requestBody) {
         User user = new User(requestBody.get("userEmail"), requestBody.get("userName"), requestBody.get("userTweeter"), requestBody.get("userCountry"), requestBody.get("userSex"), requestBody.get("userSexPref"));
-        helloRepository.userAdded(user);
-        return true;
+        return helloRepository.userAdded(user);
     }
 
     @GetMapping(path="/api/matches", produces = MediaType.APPLICATION_JSON_VALUE)
