@@ -32,7 +32,7 @@ public class HelloControllerIT {
     }
 
     @Test
-    void methodPost() throws Exception {
+    void userRegistered() throws Exception {
         User user = new User("tchiasso@gmail.com", "Tchiass", "ATchiasso", "FR", "M", "F");
         ObjectMapper mapper = new ObjectMapper();
         String result = mapper.writeValueAsString(user);

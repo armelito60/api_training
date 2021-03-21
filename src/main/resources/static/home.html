@@ -58,12 +58,11 @@
         var userCountry = getParameterByName('country');
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/matches?userName=' + encodeURIComponent(userName) + "&userCountry=" + encodeURIComponent(userCountry), true);
+        xhr.open(form.method, form.action, true);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-        xhr.onreadystatechange = () => updateMatches(xhr);
-        xhr.send();
-
-        document.getElementById('userName').innerHTML = userName;
+        xhr.onreadystatechange = () => {
+            document.location.href = "/home.html?name=" + encodeURIComponent(formData.userName) + "&country=" + encodeURIComponent(formData.userCountry);
+        };
     }
 
     loadMatches();
