@@ -37,6 +37,6 @@ class HelloController {
         List<Match> matches = agifyService.getMatch(principal.getAge());
         ObjectMapper mapper = new ObjectMapper();
         String result = mapper.writeValueAsString(matches);
-        return result;
+        return "result : "+result;
     }
 }
