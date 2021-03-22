@@ -22,7 +22,7 @@ public class HelloControllerIT {
         this.mockMvc = mockMvc;
     }
 
-    /*@Test
+    @Test
     void match() throws Exception {
         mockMvc
             .perform(MockMvcRequestBuilders.get("/api/matches?userName=Lilian&userCountry=FR"))
@@ -30,7 +30,7 @@ public class HelloControllerIT {
             .andExpect(content().json("""
                         [{"name":"Guillaume","twitter":"Guillaume"},{"name":"Julie","twitter":"Julie"}]
                         """));
-    }*/
+    }
 
     @Test
     void userRegistered() throws Exception {
