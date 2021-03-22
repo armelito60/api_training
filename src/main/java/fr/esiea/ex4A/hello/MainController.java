@@ -9,23 +9,23 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-class HelloController {
+class MainController {
 
-    private final HelloRepository helloRepository;
+    private final MainRepository mainRepository;
     private final AgifyClient client;
     private final AgifyService agifyService;
 
-    HelloController(AgifyClient client, AgifyService agifyService, HelloRepository helloRepository) {
+    MainController(AgifyClient client, AgifyService agifyService, MainRepository mainRepository) {
         this.client = client;
         this.agifyService = agifyService;
-        this.helloRepository = helloRepository;
+        this.mainRepository = mainRepository;
     }
 
     @ResponseBody
     @PostMapping(path="/api/inscription", consumes = MediaType.APPLICATION_JSON_VALUE)
     boolean userIdentified(@RequestBody Map<String,String> requestBody) {
         User user = new User(requestBody.get("userEmail"), requestBody.get("userName"), requestBody.get("userTweeter"), requestBody.get("userCountry"), requestBody.get("userSex"), requestBody.get("userSexPref"));
-        return helloRepository.userAdded(user);
+        return mainRepository.userAdded(user);
     }
 
     @GetMapping(path="/api/matches", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,7 +34,8 @@ class HelloController {
                  @RequestParam(name = "userCountry", required = true) String userCountry) throws IOException {
         client.getAgeUser(userName, userCountry);
         AgifyUser principal = agifyService.userAge(userName, userCountry);
-        List<Match> matches = agifyService.getMatch(principal.getAge());
+        System.out.println(principal.getAge());
+        List<Match> matches = agifyService.getMatch(principal.getAge().intValue());
         ObjectMapper mapper = new ObjectMapper();
         String result = mapper.writeValueAsString(matches);
         return result;

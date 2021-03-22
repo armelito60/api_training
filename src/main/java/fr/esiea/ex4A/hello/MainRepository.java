@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-class HelloRepository {
+class MainRepository {
     private final List<User> userSubscribed = new ArrayList<>();
 
-    public HelloRepository() {
+    public MainRepository() {
         User user1 = new User("guillaume@etudiant.fr", "Guillaume", "Guillaume", "FR", "M", "M");
         userSubscribed.add(user1);
         User user2 = new User("valentin@etudiant.fr", "Valentin", "Valentin", "FR", "M", "F");
