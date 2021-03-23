@@ -22,7 +22,7 @@ public class HelloControllerIT {
         this.mockMvc = mockMvc;
     }
 
-    /*@Test
+    @Test
     void match() throws Exception {
         mockMvc
             .perform(MockMvcRequestBuilders.get("/api/matches?userName=Lilian&userCountry=FR"))
@@ -30,11 +30,11 @@ public class HelloControllerIT {
             .andExpect(content().json("""
                         [{"name":"Guillaume","twitter":"Guillaume"},{"name":"Julie","twitter":"Julie"}]
                         """));
-    }*/
+    }
 
     @Test
     void userRegistered() throws Exception {
-        User user = new User("tchiasso@gmail.com", "Tchiass", "ATchiasso", "FR", "M", "F");
+        User user = new User("tchiasso@gmail.com", "Dylan", "DylanM", "FR", "M", "F");
         ObjectMapper mapper = new ObjectMapper();
         String result = mapper.writeValueAsString(user);
         mockMvc
