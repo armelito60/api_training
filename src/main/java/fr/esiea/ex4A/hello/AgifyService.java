@@ -9,11 +9,11 @@ import java.util.ArrayList;
 public class AgifyService {
 
     private final AgifyClient client;
-    private final HelloRepository helloRepository;
+    private final MainRepository mainRepository;
 
-    public AgifyService(AgifyClient client, HelloRepository helloRepository) {
+    public AgifyService(AgifyClient client, MainRepository mainRepository) {
         this.client = client;
-        this.helloRepository = helloRepository;
+        this.mainRepository = mainRepository;
     }
 
     public AgifyUser userAge(String name, String country) throws IOException {
@@ -22,7 +22,7 @@ public class AgifyService {
 
     public ArrayList<Match> getMatch(int goalAge) throws IOException {
         ArrayList<Match> matches = new ArrayList<>();
-        for(User match : helloRepository.getUserSubscribed()) {
+        for(User match : mainRepository.getUserSubscribed()) {
             AgifyUser foundMatch = userAge(match.getUserName(), match.getUserCountry());
             if(foundMatch.getAge() - goalAge < 5 && foundMatch.getAge() - goalAge > -5) {
                 matches.add(new Match(match.getUserName(), match.getUserTweeter()));
