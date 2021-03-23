@@ -24,7 +24,7 @@ public class AgifyService {
         ArrayList<Match> matches = new ArrayList<>();
         for(User match : mainRepository.getUserSubscribed()) {
             AgifyUser foundMatch = userAge(match.getUserName(), match.getUserCountry());
-            if(foundMatch.getAge() - goalAge < 5 && foundMatch.getAge() - goalAge > -5) {
+            if(foundMatch.getAge() - goalAge < 5 && foundMatch.getAge() - goalAge > - 5) {
                 matches.add(new Match(match.getUserName(), match.getUserTweeter()));
             }
         }

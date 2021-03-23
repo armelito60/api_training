@@ -7,7 +7,7 @@
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
-<h1>Bienvenu sur MeetMock <span id="userName" class="text-primary"></span> !</h1>
+<h1>Bienvenue sur MeetMock <span id="userName" class="text-primary"></span> !</h1>
 
 <div id="matches" class="container mt-5 border border-3 rounded bg-light"></div>
 
@@ -15,7 +15,7 @@
     function getParameterByName(name, url = window.location.href) {
         name = name.replace(/[\[\]]/g, '\\$&');
         var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
+            results = regex.exec(url);
         if (!results) return null;
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
@@ -58,11 +58,12 @@
         var userCountry = getParameterByName('country');
 
         var xhr = new XMLHttpRequest();
-        xhr.open(form.method, form.action, true);
+        xhr.open('GET', '/api/matches?userName=' + encodeURIComponent(userName) + "&userCountry=" + encodeURIComponent(userCountry), true);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-        xhr.onreadystatechange = () => {
-            document.location.href = "/home.html?name=" + encodeURIComponent(formData.userName) + "&country=" + encodeURIComponent(formData.userCountry);
-        };
+        xhr.onreadystatechange = () => updateMatches(xhr);
+        xhr.send();
+
+        document.getElementById('userName').innerHTML = userName;
     }
 
     loadMatches();
