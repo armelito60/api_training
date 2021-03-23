@@ -34,8 +34,7 @@ class MainController {
                  @RequestParam(name = "userCountry", required = true) String userCountry) throws IOException {
         client.getAgeUser(userName, userCountry);
         AgifyUser principal = agifyService.userAge(userName, userCountry);
-        System.out.println(principal.getAge());
-        List<Match> matches = agifyService.getMatch(principal.getAge().intValue());
+        List<Match> matches = agifyService.getMatch(principal.getAge());
         ObjectMapper mapper = new ObjectMapper();
         String result = mapper.writeValueAsString(matches);
         return result;
