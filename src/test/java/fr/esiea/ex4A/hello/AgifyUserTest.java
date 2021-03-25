@@ -7,6 +7,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class AgifyUserTest {
     AgifyUser AgifyUserTest() throws IOException {
@@ -16,10 +17,9 @@ public class AgifyUserTest {
             .build()
             .create(AgifyClient.class);
 
-        Call<AgifyUser> user = test.getAgeUser("Armel","FR");
-
-        AgifyUser userFinal = user.execute().body();
-        return userFinal;
+        Call<Map<String,String>> user = test.getAgeUser("Armel","FR");
+        Map<String, String> userFinal = user.execute().body();
+        return new AgifyUser(userFinal.get("name"), Integer.parseInt(userFinal.get("age")),Integer.parseInt(userFinal.get("count")),userFinal.get("country_id"));
     }
 
     @Test
@@ -30,23 +30,9 @@ public class AgifyUserTest {
     }
 
     @Test
-    void setName() throws IOException {
-        AgifyUser testUser = AgifyUserTest();
-        testUser.setName("armelito");
-        Assertions.assertEquals("armelito",testUser.getName());
-    }
-
-    @Test
     void getAge() throws IOException {
         AgifyUser testUser = AgifyUserTest();
         Assertions.assertEquals(56,testUser.getAge());
-    }
-
-    @Test
-    void setAge() throws IOException {
-        AgifyUser testUser = AgifyUserTest();
-        testUser.setAge(23);
-        Assertions.assertEquals(23,testUser.getAge());
     }
 
     @Test
@@ -56,22 +42,8 @@ public class AgifyUserTest {
     }
 
     @Test
-    void setCount() throws IOException {
-        AgifyUser testUser = AgifyUserTest();
-        testUser.setCount(500);
-        Assertions.assertEquals(500,testUser.getCount());
-    }
-
-    @Test
     void getCountryId() throws IOException {
         AgifyUser testUser = AgifyUserTest();
-        Assertions.assertEquals("FR",testUser.getCountryId());
-    }
-
-    @Test
-    void setCountryId() throws IOException {
-        AgifyUser testUser = AgifyUserTest();
-        testUser.setCountryId("FR");
         Assertions.assertEquals("FR",testUser.getCountryId());
     }
 }
