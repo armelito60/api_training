@@ -28,7 +28,7 @@ public class MainControllerIT {
             .perform(MockMvcRequestBuilders.get("/api/matches?userName=Lilian&userCountry=FR"))
             .andExpect(status().isOk())
             .andExpect(content().json("""
-                        [{"name":"Guillaume","twitter":"Guillaume"},{"name":"Julie","twitter":"Julie"}]
+                        [{"name":"Guillaume","twitter":"Guillaume"}]
                         """));
     }
 
